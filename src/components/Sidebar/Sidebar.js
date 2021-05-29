@@ -1,14 +1,14 @@
 /*!
 
 =========================================================
-* Black Dashboard React v1.1.0
+* Sort Detective
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2020 Creative Tim, Ante Zovko (https://www.creative-tim.com)
 * Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
 
-* Coded by Creative Tim
+* Coded by Creative Tim, Ante Zovko
 
 =========================================================
 
@@ -59,53 +59,53 @@ class Sidebar extends React.Component {
     const { bgColor, routes, rtlActive, logo } = this.props;
     let logoImg = null;
     let logoText = null;
-    if (logo !== undefined) {
-      if (logo.outterLink !== undefined) {
-        logoImg = (
-          <a
-            href={logo.outterLink}
-            className="simple-text logo-mini"
-            target="_blank"
-            onClick={this.props.toggleSidebar}
-          >
-            <div className="logo-img">
-              <img src={logo.imgSrc} alt="react-logo" />
-            </div>
-          </a>
-        );
-        logoText = (
-          <a
-            href={logo.outterLink}
-            className="simple-text logo-normal"
-            target="_blank"
-            onClick={this.props.toggleSidebar}
-          >
-            {logo.text}
-          </a>
-        );
-      } else {
-        logoImg = (
-          <Link
-            to={logo.innerLink}
-            className="simple-text logo-mini"
-            onClick={this.props.toggleSidebar}
-          >
-            <div className="logo-img">
-              <img src={logo.imgSrc} alt="react-logo" />
-            </div>
-          </Link>
-        );
-        logoText = (
-          <Link
-            to={logo.innerLink}
-            className="simple-text logo-normal"
-            onClick={this.props.toggleSidebar}
-          >
-            {logo.text}
-          </Link>
-        );
-      }
-    }
+    // if (logo !== undefined) {
+    //   if (logo.outterLink !== undefined) {
+    //     logoImg = (
+    //       <a
+    //         href={logo.outterLink}
+    //         className="simple-text logo-mini"
+    //         target="_blank"
+    //         onClick={this.props.toggleSidebar}
+    //       >
+    //         <div className="logo-img">
+    //           <img src={logo.imgSrc} alt="react-logo" />
+    //         </div>
+    //       </a>
+    //     );
+    //     logoText = (
+    //       <a
+    //         href={logo.outterLink}
+    //         className="simple-text logo-normal"
+    //         target="_blank"
+    //         onClick={this.props.toggleSidebar}
+    //       >
+    //         {logo.text}
+    //       </a>
+    //     );
+    //   } else {
+    //     logoImg = (
+    //       <Link
+    //         to={logo.innerLink}
+    //         className="simple-text logo-mini"
+    //         onClick={this.props.toggleSidebar}
+    //       >
+    //         <div className="logo-img">
+    //           <img src={logo.imgSrc} alt="react-logo" />
+    //         </div>
+    //       </Link>
+    //     );
+    //     logoText = (
+    //       <Link
+    //         to={logo.innerLink}
+    //         className="simple-text logo-normal"
+    //         onClick={this.props.toggleSidebar}
+    //       >
+    //         {logo.text}
+    //       </Link>
+    //     );
+    //   }
+    // }
     return (
       <div className="sidebar" data={bgColor}>
         <div className="sidebar-wrapper" ref="sidebar">

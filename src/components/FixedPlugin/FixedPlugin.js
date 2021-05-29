@@ -1,14 +1,14 @@
 /*!
 
 =========================================================
-* Black Dashboard React v1.1.0
+* Sort Detective
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2020 Creative Tim, Ante Zovko (https://www.creative-tim.com)
 * Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
 
-* Coded by Creative Tim
+* Coded by Creative Tim, Ante Zovko
 
 =========================================================
 
@@ -42,7 +42,6 @@ class FixedPlugin extends Component {
       updateCounter: this.props.updateCounter
 
     };
-    console.log(this.props.updateCounter)
 
   
   }

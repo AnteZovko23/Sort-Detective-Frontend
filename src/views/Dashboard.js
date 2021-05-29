@@ -1,20 +1,23 @@
 /*!
 
 =========================================================
-* Black Dashboard React v1.1.0
+* Sort Detective
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Copyright 2020 Creative Tim, Ante Zovko (https://www.creative-tim.com)
 * Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
 
-* Coded by Creative Tim
+* Coded by Creative Tim, Ante Zovko
 
 =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
+import Parser from 'html-react-parser/dist/html-react-parser'
+
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -55,6 +58,7 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
 var parse = require('html-react-parser')
 
 class Dashboard extends React.Component {
+  _isMounted = false
   constructor(props) {
     super(props);
   
@@ -68,7 +72,7 @@ class Dashboard extends React.Component {
       comparisonsLabels:[],
       timeData:[],
       timeLabels:[],
-      bigChartData: "avgTime",
+      bigChartData: "worstTime",
       updateCounter: 0,
       avgCaseGraphData: [],
       avgCaseLabel: '',
@@ -85,6 +89,8 @@ class Dashboard extends React.Component {
     this.cancelRequests = this.cancelRequests.bind(this)
 
   }
+
+  
 
   setBgChartData = name => {
     
@@ -111,6 +117,8 @@ class Dashboard extends React.Component {
     
    
   }
+
+    
 
   getData(listSize, buttonAlgorithm) {
      
@@ -153,18 +161,18 @@ class Dashboard extends React.Component {
         updateCounter: prevState.updateCounter + 1
       }))
 
-      this.setState(prevState => ({
-        avgCaseGraphData: [...prevState.avgCaseGraphData, response[3]],
-        bestCaseGraphData: [...prevState.bestCaseGraphData, response[7]],
-        worstCaseGraphData: [...prevState.worstCaseGraphData, response[5]],
-        avgCaseLabel:response[2],
-        worstCaseLabel:response[4],
-        bestCaseLabel:response[6],
-        currLabel: this.state.avgCaseLabel,
-        bigChartData:"avgTime",
-        algorithmInfo:response[8]
-
-      }))
+        this.setState(prevState => ({
+          avgCaseGraphData: [...prevState.avgCaseGraphData, response[3]],
+          bestCaseGraphData: [...prevState.bestCaseGraphData, response[7]],
+          worstCaseGraphData: [...prevState.worstCaseGraphData, response[5]],
+          avgCaseLabel:response[2],
+          worstCaseLabel:response[4],
+          bestCaseLabel:response[6],
+          currLabel: this.state.avgCaseLabel,
+          bigChartData:"worstTime"
+  
+        }))
+     
 
       
     
@@ -207,7 +215,7 @@ class Dashboard extends React.Component {
       worstCaseLabel:response[4],
       bestCaseLabel:response[6],
       currLabel: this.state.avgCaseLabel,
-      bigChartData:"avgTime"
+      bigChartData:"worstTime"
 
     }))
   
@@ -253,7 +261,7 @@ class Dashboard extends React.Component {
         worstCaseLabel:response[4],
         bestCaseLabel:response[6],
         currLabel: this.state.avgCaseLabel,
-        bigChartData:"avgTime"
+        bigChartData:"worstTime"
   
       }))
     
@@ -299,7 +307,7 @@ class Dashboard extends React.Component {
           worstCaseLabel:response[4],
           bestCaseLabel:response[6],
           currLabel: this.state.avgCaseLabel,
-          bigChartData:"avgTime"
+          bigChartData:"worstTime"
     
         }))
        
@@ -326,18 +334,27 @@ class Dashboard extends React.Component {
         
 
   }
-
   // shouldComponentUpdate() {
   //   // return this.state.shouldUpdate;
   // }
 
-  componentDidMount() {
+  // componentDidMount() {
 
-    
-    // this.getData()
-    // this.setState({allLabels:lodash.zip(this.state.comparisonsLabels,this.state.movementsLabels,this.state.timeLabels)})
-      
+  componentWillUnmount() {
+
+    this._isMounted = false
+
   }
+
+    componentDidMount(){
+
+      this._isMounted = true
+
+    }
+  //   // this.getData()
+  //   // this.setState({allLabels:lodash.zip(this.state.comparisonsLabels,this.state.movementsLabels,this.state.timeLabels)})
+      
+  // }
 
 
   render() {
@@ -353,7 +370,7 @@ class Dashboard extends React.Component {
                      
                       <h1 className="card-category">Time Complexity</h1>
                       <CardTitle tag="h2">Algorithm: {this.state.buttonAlgorithm.replace("Sort", " Sort")}</CardTitle>
-                     {this.state.currLabel !== undefined && <CardTitle tag="h2">{this.state.currLabel.replace("N", "n").replace("f", "O")}</CardTitle>}
+                     {this.state.currLabel !== undefined && <CardTitle tag="h2">{this.state.currLabel.replace("f(n) = ", "")}</CardTitle>}
 
                     </Col>
                     <Col sm="6">
@@ -361,6 +378,32 @@ class Dashboard extends React.Component {
                         className="btn-group-toggle float-right"
                         data-toggle="buttons"
                       >
+                        
+                        <Button
+                          color="info"
+                          id="1"
+                          size="sm"
+                          tag="label"
+                          className={classNames("btn-simple", {
+                            active: this.state.bigChartData === "worstTime"
+                          })}
+                          onClick={() =>{
+                            this.setBgChartData("worstTime"); 
+                            this.setState({currLabel: this.state.worstCaseLabel})
+                          }}
+                        >
+                          <input
+                            className="d-none"
+                            name="options"
+                            type="radio"
+                          />
+                          <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          Worst Case Time Complexity - O
+                          </span>
+                          <span className="d-block d-sm-none">
+                            <i className="tim-icons icon-gift-2" />
+                          </span>
+                        </Button>
                         <Button
                           tag="label"
                           className={classNames("btn-simple", {
@@ -381,35 +424,10 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Average Time Complexity
+                            Average Time Complexity - Θ
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-single-02" />
-                          </span>
-                        </Button>
-                        <Button
-                          color="info"
-                          id="1"
-                          size="sm"
-                          tag="label"
-                          className={classNames("btn-simple", {
-                            active: this.state.bigChartData === "worstTime"
-                          })}
-                          onClick={() =>{
-                            this.setBgChartData("worstTime"); 
-                            this.setState({currLabel: this.state.worstCaseLabel})
-                          }}
-                        >
-                          <input
-                            className="d-none"
-                            name="options"
-                            type="radio"
-                          />
-                          <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Worst Case Time Complexity
-                          </span>
-                          <span className="d-block d-sm-none">
-                            <i className="tim-icons icon-gift-2" />
                           </span>
                         </Button>
                         <Button
@@ -431,7 +449,7 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Best Case Time Complexity
+                          Best Case Time Complexity - Ω
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-tap-02" />
@@ -715,25 +733,9 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <Table className="tablesorter">
                     <thead className="text-primary">
-                      <tr>
-                        
-                      </tr>
-                    </thead>
-                    <tbody>
-                   
-                      
-                        
-        
-                    {parse(this.state.algorithmInfo)}      
-                                
-                        
-                              
-
-                     
-
-                      
                     
-                    </tbody>
+                    </thead>
+                    <tbody>{parse(this.state.algorithmInfo)}</tbody>
                     </Table>
                     </CardBody>
               </Card>

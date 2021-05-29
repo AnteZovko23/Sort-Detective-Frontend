@@ -16,7 +16,7 @@
   + @types/markerclustererplus@2.1.33
   + @types/googlemaps@3.39.3
   + typescript@3.8.3
-- For Creative Tim copyrights
+- For Creative Tim, Ante Zovko copyrights
   + gulp@4.0.2
   + gulp-append-prepend@1.0.8
 ### Updated dependencies
@@ -48,4 +48,4 @@ npm WARN deprecated popper.js@1.16.1: Popper changed home, find its new releases
 ## [1.0.0] 2018-11-29
 ### Original Release
 - Added Reactstrap as base framework
-- Added design from PRODUCT NAME by Creative Tim
+- Added design from PRODUCT NAME by Creative Tim, Ante Zovko
