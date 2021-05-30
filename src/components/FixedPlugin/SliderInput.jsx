@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 
 export default function InputSlider(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(2500);
+  const [value, setValue] = React.useState(1000);
   props.sliderdata(value)
 
   const handleSliderChange = (event, newValue) => {
@@ -29,11 +29,14 @@ export default function InputSlider(props) {
   };
 
   const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
+    if (value <= 0) {
+      setValue(10);
     }
     else if (value > 1000000) {
       setValue(1000000);
+    }
+    else if(typeof value !== 'number'){
+      setValue(10)
     }
   };
 

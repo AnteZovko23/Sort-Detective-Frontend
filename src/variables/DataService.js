@@ -1,10 +1,10 @@
 import axios from 'axios';
 import *  as math from 'mathjs'
 
-const DATA_IN_ORDER = 'http://localhost:8080/sortDetective/getSortData?algName=&listSize=&buttonAlgorithm=&listType=InOrder'
-const DATA_ALMOST_IN_ORDER = 'http://localhost:8080/sortDetective/getSortData?algName=&listSize=&buttonAlgorithm=&listType=AlmostInOrder'
-const DATA_REVERSE_ORDER = 'http://localhost:8080/sortDetective/getSortData?algName=&listSize=&buttonAlgorithm=&listType=ReverseOrder'
-const DATA_RANDOM_ORDER = 'http://localhost:8080/sortDetective/getSortData?algName=&listSize=&buttonAlgorithm=&listType=RandomOrder'
+const DATA_IN_ORDER = 'https://sort-detective-backend.herokuapp.com/sortDetective/getSortData?algName=&listSize=&buttonAlgorithm=&listType=InOrder'
+const DATA_ALMOST_IN_ORDER = 'https://sort-detective-backend.herokuapp.com/sortDetective/getSortData?algName=&listSize=&buttonAlgorithm=&listType=AlmostInOrder'
+const DATA_REVERSE_ORDER = 'https://sort-detective-backend.herokuapp.com/sortDetective/getSortData?algName=&listSize=&buttonAlgorithm=&listType=ReverseOrder'
+const DATA_RANDOM_ORDER = 'https://sort-detective-backend.herokuapp.com/sortDetective/getSortData?algName=&listSize=&buttonAlgorithm=&listType=RandomOrder'
 var CancelToken = axios.CancelToken;
 var source = CancelToken.source();
 const parser = math.parser()

@@ -18,6 +18,7 @@
 import React from "react";
 import { unstable_batchedUpdates } from "react-dom";
 import {Link} from 'react-router-dom'
+// import profilePic from "../assets/img/ante.jpg"
 // reactstrap components
 import {
   Button,
@@ -49,14 +50,12 @@ class UserProfile extends React.Component {
                     <div className="block block-two" />
                     <div className="block block-three" />
                     <div className="block block-four" />
-                    <a href="#pablo" onClick={e => e.preventDefault()}>
                       <img
                         alt="ProfilePicture"
                         className="avatar"
-                        src={require("assets/img/ante.jpg")}
+                        src={require('../assets/img/ante.jpg').default}
                       />
                       <h5 className="title">Ante Zovko</h5>
-                    </a>
                     <p className="description">Backend Software Engineer</p>
                   </div>
                   <div className="card-description">
